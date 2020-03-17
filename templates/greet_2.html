@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greet v2</title>
+</head>
+
+<body>
+    <h1>Hi there, {{username}}</h1>
+    {% if wants_compliment %}
+    <h2>Here are the compliments</h2>
+    <ul>
+        {%for compliment in compliments%}
+        <li>{{compliment}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

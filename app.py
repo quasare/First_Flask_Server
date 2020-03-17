@@ -1,33 +1,65 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
+from flask_debugtoolbar import DebugToolbarExtension
+from random import randint, choice, sample
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "oh-so-secret"
+
+debug = DebugToolbarExtension(app)
 
 
 @app.route('/')
 def home_page():
-    html = """
-        <html>
-            <body>
-                <h1>Home Page</h1>
-                <p>Welcome to my page</P>
-                <a href='/hello'> Go to hello page</a>
-            </body
-        </html>    
-    """
-    return html
+    return render_template("hello.html")
 
 
-@app.route('/hello')
+@app.route('/form')
+def show_form():
+    return render_template("form.html")
+
+
+COMPLIMENTS = ["cool", "smart", "bold", 'calm', "Determined"]
+
+
+@app.route('/form-2')
+def show_form_2():
+    return render_template('form_2.html')
+
+
+@app.route('/spell/<word>')
+def spell_work(word):
+    caps_word = word.upper()
+    return render_template('spell_word.html', word=caps_word)
+
+
+@app.route('/greet')
+def get_greeting():
+    nice_thing = choice(COMPLIMENTS)
+    username = request.args['username']
+    return render_template('greet.html', username=username, compliment=nice_thing)
+
+
+@app.route('/greet-2')
+def get_greeting_2():
+    username = request.args['username']
+    wants = request.args.get('wants_compliments')
+    nice_things = sample(COMPLIMENTS, 3)
+    return render_template('greet_2.html', username=username, wants_compliment=wants, compliments=nice_things)
+
+
+@app.route('/hello/')
 def say_hello():
-    html = """
-        <html>
-            <body>
-                <h1>Hello</h1>
-                <p>This is the hello page</P>
-            </body
-        </html>    
-    """
-    return html
+
+    return render_template("hello.html")
+
+
+@app.route('/lucky')
+def show_lucky_num():
+    "Example of simple dynamic template"
+
+    num = randint(1, 10)
+
+    return render_template("lucky.html", lucky_num=num, msg="You are so lucky")
 
 
 @app.route('/goodbye')
