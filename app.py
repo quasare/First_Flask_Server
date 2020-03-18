@@ -10,7 +10,7 @@ debug = DebugToolbarExtension(app)
 
 @app.route('/')
 def home_page():
-    return render_template("hello.html")
+    return render_template("home.html")
 
 
 @app.route('/form')
@@ -60,12 +60,6 @@ def show_lucky_num():
     num = randint(1, 10)
 
     return render_template("lucky.html", lucky_num=num, msg="You are so lucky")
-
-
-@app.route('/goodbye')
-def say_bye():
-    return 'Good Bye'
-
 
 @app.route('/search')
 def search():

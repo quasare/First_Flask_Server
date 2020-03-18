@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greeter Form</title>
-</head>
+{% block title %} Form V1 {% endblock %}
+{% block content %}
 
-<body>
-    <h1>Greeter Form</h1>
-    <form action="/greet">
-        <input type="text" placeholder="your name" name="username" id="">
-        <button>Submit !</button>
-    </form>
-</body>
 
-</html>
+<h1>Greeter Form</h1>
+<form action="/greet">
+    <input type="text" placeholder="your name" name="username" id="">
+    <button>Submit !</button>
+</form>
+{% endblock %}
